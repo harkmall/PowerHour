@@ -25,6 +25,8 @@
 		A7AE03C320C8B846009F6A5C /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AE03C220C8B846009F6A5C /* NowPlayingViewController.swift */; };
 		A7AE03C620C8BA32009F6A5C /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AE03C520C8BA32009F6A5C /* Song.swift */; };
 		A7AE03C720C8BA32009F6A5C /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AE03C520C8BA32009F6A5C /* Song.swift */; };
+		A7AE03C920C8BEDA009F6A5C /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AE03C820C8BEDA009F6A5C /* WatchSessionManager.swift */; };
+		A7AE03CB20C8BF8B009F6A5C /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7AE03CA20C8BF8B009F6A5C /* WatchSessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		A7AE03C020C8B5FF009F6A5C /* SongsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsDataSource.swift; sourceTree = "<group>"; };
 		A7AE03C220C8B846009F6A5C /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		A7AE03C520C8BA32009F6A5C /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		A7AE03C820C8BEDA009F6A5C /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
+		A7AE03CA20C8BF8B009F6A5C /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 				A7AE03C020C8B5FF009F6A5C /* SongsDataSource.swift */,
 				A7AE03C520C8BA32009F6A5C /* Song.swift */,
 				A7AE03C220C8B846009F6A5C /* NowPlayingViewController.swift */,
+				A7AE03C820C8BEDA009F6A5C /* WatchSessionManager.swift */,
 				A711605820C60B450024FC0F /* Info.plist */,
 				A711605320C60B450024FC0F /* Assets.xcassets */,
 				A711605520C60B450024FC0F /* LaunchScreen.storyboard */,
@@ -165,6 +170,7 @@
 				A711607120C60B460024FC0F /* ExtensionDelegate.swift */,
 				A711607320C60B460024FC0F /* NotificationController.swift */,
 				A711607520C60B460024FC0F /* ComplicationController.swift */,
+				A7AE03CA20C8BF8B009F6A5C /* WatchSessionManager.swift */,
 				A711607720C60B470024FC0F /* Assets.xcassets */,
 				A711607920C60B470024FC0F /* Info.plist */,
 				A711607A20C60B470024FC0F /* PushNotificationPayload.apns */,
@@ -304,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7AE03C920C8BEDA009F6A5C /* WatchSessionManager.swift in Sources */,
 				A7AE03C320C8B846009F6A5C /* NowPlayingViewController.swift in Sources */,
 				A711604F20C60B440024FC0F /* SongsViewController.swift in Sources */,
 				A711604D20C60B440024FC0F /* AppDelegate.swift in Sources */,
@@ -316,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7AE03CB20C8BF8B009F6A5C /* WatchSessionManager.swift in Sources */,
 				A711607420C60B460024FC0F /* NotificationController.swift in Sources */,
 				A711607620C60B460024FC0F /* ComplicationController.swift in Sources */,
 				A711607220C60B460024FC0F /* ExtensionDelegate.swift in Sources */,

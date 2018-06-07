@@ -18,8 +18,8 @@
                             <items>
                                 <group width="1" alignment="center" layout="vertical" id="GkP-AY-JmP">
                                     <items>
-                                        <label alignment="center" text="Artist" id="m3I-aa-hjp"/>
                                         <label alignment="center" text="Song" id="qne-Gu-NI1"/>
+                                        <label alignment="center" text="Artist" id="m3I-aa-hjp"/>
                                     </items>
                                 </group>
                                 <group width="1" alignment="center" spacing="4" id="Gq4-hU-wLZ">
@@ -49,7 +49,9 @@
                         </group>
                     </items>
                     <connections>
+                        <outlet property="artistLabel" destination="m3I-aa-hjp" id="LYP-9S-Xk7"/>
                         <outlet property="playPauseButton" destination="sEn-js-Wti" id="mar-rE-hmK"/>
+                        <outlet property="songLabel" destination="qne-Gu-NI1" id="K3n-Uy-vIc"/>
                         <outlet property="volumeSlider" destination="W1i-3e-8JU" id="PYG-Dt-iJU"/>
                     </connections>
                 </controller>

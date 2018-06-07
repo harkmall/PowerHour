@@ -120,7 +120,7 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fuX-yI-m4d">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="fuX-yI-m4d">
                                         <rect key="frame" x="-2" y="139" width="339" height="31"/>
                                         <connections>
                                             <action selector="volumeSliderChanged:" destination="joH-L7-p5l" eventType="valueChanged" id="3KT-GX-Xhi"/>

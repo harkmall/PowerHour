@@ -21,6 +21,12 @@ class NowPlayingViewController: UIViewController {
         songNameLabel.text = song.name
         artistNameLabel.text = song.artist
         
+        do {
+            try WatchSessionManager.sharedManager.updateApplicationContext(["songName": song.name ?? "", "songArtist": song.artist ?? ""])
+        } catch {
+            print("Looks like your song got stuck on the way! Please send again!")
+        }
+        
     }
     
     @IBAction func playPausePressed(_ sender: UIButton) {
@@ -35,7 +41,7 @@ class NowPlayingViewController: UIViewController {
     }
     
     @IBAction func volumeSliderChanged(_ sender: UISlider) {
-    
+
     }
 
 }

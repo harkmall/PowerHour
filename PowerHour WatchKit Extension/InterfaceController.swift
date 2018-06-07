@@ -13,6 +13,8 @@ class InterfaceController: WKInterfaceController {
     
     @IBOutlet var playPauseButton: WKInterfaceButton!
     @IBOutlet var volumeSlider: WKInterfaceSlider!
+    @IBOutlet var artistLabel: WKInterfaceLabel!
+    @IBOutlet var songLabel: WKInterfaceLabel!
     
     var songState: SongState = .paused
     var currentVolumeLevel: Float = 1.0
@@ -23,6 +25,7 @@ class InterfaceController: WKInterfaceController {
         
         crownSequencer.delegate = self
         volumeSlider.setValue(currentVolumeLevel)
+        WatchSessionManager.sharedManager.receiveSongDelegate = self
     }
     
     override func willActivate() {
@@ -46,6 +49,13 @@ class InterfaceController: WKInterfaceController {
         currentVolumeLevel = value
     }
 
+}
+
+extension InterfaceController: ReceiveSongDelegate {
+    func didReceiveSong(songName: String, songArtist: String) {
+        songLabel.setText(songName)
+        artistLabel.setText(songArtist)
+    }
 }
 
 extension InterfaceController: WKCrownDelegate {
