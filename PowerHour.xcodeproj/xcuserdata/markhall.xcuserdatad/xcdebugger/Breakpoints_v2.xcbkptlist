@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PowerHour WatchKit Extension/InterfaceController.swift"
-            timestampString = "550028830.056688"
+            timestampString = "550455703.506924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "didReceiveSong(songName:songArtist:)"
+            landmarkName = "didReceiveSong(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -23,4 +23,14 @@ struct Song {
         self.artist = artist
         self.state = state
     }
+    
+    init(dict: [String: String]) {
+        name = dict["name"]
+        artist = dict["artist"]
+    }
+    
+    func serialized() -> [String: String] {
+        return ["name": name ?? "", "artist": artist ?? ""]
+    }
+    
 }

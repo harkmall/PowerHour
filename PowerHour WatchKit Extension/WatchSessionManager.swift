@@ -9,7 +9,7 @@
 import WatchConnectivity
 
 protocol ReceiveSongDelegate {
-    func didReceiveSong(songName: String, songArtist: String)
+    func didReceiveSong(_ song: Song)
 }
 
 class WatchSessionManager: NSObject {
@@ -35,10 +35,11 @@ extension WatchSessionManager: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        guard let songName = applicationContext["songName"] as? String,
-            let songArtist = applicationContext["songArtist"] as? String else {
+        guard let songData = applicationContext["song"] as? [String: String] else {
             return
         }
-        receiveSongDelegate?.didReceiveSong(songName: songName, songArtist: songArtist)
+        let song = Song(dict: songData)
+        receiveSongDelegate?.didReceiveSong(song)
+
     }
 }

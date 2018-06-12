@@ -52,9 +52,9 @@ class InterfaceController: WKInterfaceController {
 }
 
 extension InterfaceController: ReceiveSongDelegate {
-    func didReceiveSong(songName: String, songArtist: String) {
-        songLabel.setText(songName)
-        artistLabel.setText(songArtist)
+    func didReceiveSong(_ song: Song) {
+        songLabel.setText(song.name)
+        artistLabel.setText(song.artist)
     }
 }
 

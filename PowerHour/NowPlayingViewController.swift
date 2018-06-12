@@ -22,7 +22,7 @@ class NowPlayingViewController: UIViewController {
         artistNameLabel.text = song.artist
         
         do {
-            try WatchSessionManager.sharedManager.updateApplicationContext(["songName": song.name ?? "", "songArtist": song.artist ?? ""])
+            try WatchSessionManager.sharedManager.updateApplicationContext(["song": song.serialized()])
         } catch {
             print("Looks like your song got stuck on the way! Please send again!")
         }
