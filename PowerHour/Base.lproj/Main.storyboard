@@ -109,7 +109,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="loF-7Q-syw">
                                                 <rect key="frame" x="114.5" y="0.0" width="106" height="50"/>
-                                                <state key="normal" image="Pause"/>
+                                                <state key="normal" image="Play"/>
                                                 <connections>
                                                     <action selector="playPausePressed:" destination="joH-L7-p5l" eventType="touchUpInside" id="aEb-EZ-UXh"/>
                                                 </connections>
@@ -171,7 +171,7 @@
     </scenes>
     <resources>
         <image name="FastForwards" width="50" height="50"/>
-        <image name="Pause" width="50" height="50"/>
+        <image name="Play" width="48" height="48"/>
         <image name="Rewind" width="50" height="50"/>
     </resources>
 </document>

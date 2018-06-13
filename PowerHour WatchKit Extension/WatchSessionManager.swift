@@ -8,8 +8,9 @@
 
 import WatchConnectivity
 
-protocol ReceiveSongDelegate {
+protocol ApplicationContextChangedDelegate {
     func didReceiveSong(_ song: Song)
+    func didChangePlayingState(_ state: SongState)
 }
 
 class WatchSessionManager: NSObject {
@@ -18,13 +19,21 @@ class WatchSessionManager: NSObject {
     private override init() {
         super.init()
     }
-    var receiveSongDelegate: ReceiveSongDelegate?
+    var applicationContextChangedDelegate: ApplicationContextChangedDelegate?
     
     private let session: WCSession = WCSession.default
     
     func startSession() {
         session.delegate = self
         session.activate()
+    }
+    
+    func updateApplicationContext(_ applicationContext: [String: Any]) throws {
+        do {
+            try session.updateApplicationContext(applicationContext)
+        } catch let error {
+            throw error
+        }
     }
     
 }
@@ -35,11 +44,13 @@ extension WatchSessionManager: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        guard let songData = applicationContext["song"] as? [String: String] else {
-            return
+        if let songData = applicationContext["song"] as? [String: String] {
+            let song = Song(dict: songData)
+            applicationContextChangedDelegate?.didReceiveSong(song)
         }
-        let song = Song(dict: songData)
-        receiveSongDelegate?.didReceiveSong(song)
-
+        else if let stateString = applicationContext["state"] as? String, let songState = SongState(rawValue: stateString) {
+            applicationContextChangedDelegate?.didChangePlayingState(songState)
+        }
+        
     }
 }

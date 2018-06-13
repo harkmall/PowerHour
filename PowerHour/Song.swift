@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SongState {
+enum SongState: String {
     case paused
     case playing
 }

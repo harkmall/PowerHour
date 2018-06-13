@@ -8,6 +8,10 @@
 
 import WatchConnectivity
 
+protocol ApplicationContextChangedDelegate {
+    func didChangePlayingState(_ state: SongState)
+}
+
 class WatchSessionManager: NSObject {
     
     static let sharedManager = WatchSessionManager()
@@ -16,6 +20,8 @@ class WatchSessionManager: NSObject {
     }
     
     private let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
+    
+    var applicationContextChangedDelegate: ApplicationContextChangedDelegate?
     
     private var validSession: WCSession? {
         if let session = session, session.isPaired, session.isWatchAppInstalled {
@@ -41,17 +47,16 @@ class WatchSessionManager: NSObject {
 }
 
 extension WatchSessionManager: WCSessionDelegate {
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
+    
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+        if let stateString = applicationContext["state"] as? String, let songState = SongState(rawValue: stateString) {
+            applicationContextChangedDelegate?.didChangePlayingState(songState)
+        }
     }
     
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        
-    }
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) { }
+    func sessionDidBecomeInactive(_ session: WCSession) { }
+    func sessionDidDeactivate(_ session: WCSession) { }
     
     
 }

@@ -28,7 +28,7 @@
                                             <variation key="device=watch38mm" height="44"/>
                                             <variation key="device=watch42mm" width="44"/>
                                         </button>
-                                        <button width="40" height="40" alignment="center" backgroundImage="Pause" id="sEn-js-Wti">
+                                        <button width="40" height="40" alignment="center" backgroundImage="Play" id="sEn-js-Wti">
                                             <variation key="device=watch42mm" height="44" width="44"/>
                                             <connections>
                                                 <action selector="playPauseButtonPressed" destination="AgC-eL-Hgc" id="quo-XY-w1S"/>

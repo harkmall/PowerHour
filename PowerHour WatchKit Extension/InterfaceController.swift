@@ -25,7 +25,7 @@ class InterfaceController: WKInterfaceController {
         
         crownSequencer.delegate = self
         volumeSlider.setValue(currentVolumeLevel)
-        WatchSessionManager.sharedManager.receiveSongDelegate = self
+        WatchSessionManager.sharedManager.applicationContextChangedDelegate = self
     }
     
     override func willActivate() {
@@ -34,27 +34,41 @@ class InterfaceController: WKInterfaceController {
     }
     
     @IBAction func playPauseButtonPressed() {
-        switch songState {
-        case .paused:
-            songState = .playing
-            playPauseButton.setBackgroundImage(UIImage(named: "Play"))
-        case .playing:
-            songState = .paused
-            playPauseButton.setBackgroundImage(UIImage(named: "Pause"))
-            
-        }
+        songState = songState == .playing ? .paused : .playing
+        updateSongState(state: songState, sendUpdate: true)
     }
     
     @IBAction func sliderValueChanged(_ value: Float) {
         currentVolumeLevel = value
     }
+    
+    func updateSongState(state: SongState, sendUpdate: Bool) {
+        switch state {
+        case .paused:
+            playPauseButton.setBackgroundImage(UIImage(named: "Play"))
+        case .playing:
+            playPauseButton.setBackgroundImage(UIImage(named: "Pause"))
+        }
+        if sendUpdate {
+            do {
+                try WatchSessionManager.sharedManager.updateApplicationContext(["state": state.rawValue])
+            } catch let error {
+                print(error)
+            }
+        }
+    }
 
 }
 
-extension InterfaceController: ReceiveSongDelegate {
+extension InterfaceController: ApplicationContextChangedDelegate {
     func didReceiveSong(_ song: Song) {
         songLabel.setText(song.name)
         artistLabel.setText(song.artist)
+    }
+    
+    func didChangePlayingState(_ state: SongState) {
+        songState = state
+        updateSongState(state: songState, sendUpdate: false)
     }
 }
 

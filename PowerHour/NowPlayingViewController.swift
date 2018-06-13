@@ -26,17 +26,27 @@ class NowPlayingViewController: UIViewController {
         } catch {
             print("Looks like your song got stuck on the way! Please send again!")
         }
-        
+        WatchSessionManager.sharedManager.applicationContextChangedDelegate = self
     }
     
     @IBAction func playPausePressed(_ sender: UIButton) {
-        switch song.state {
+        song.state = song.state == .playing ? .paused : .playing
+        playPauseUpdateSongState(state: song.state, sendUpdate: true)
+    }
+    
+    func playPauseUpdateSongState(state: SongState, sendUpdate: Bool) {
+        switch state {
         case .playing:
-            song.state = .paused
             playPauseButton.setImage(UIImage(named: "Pause"), for: .normal)
         case .paused:
-            song.state = .playing
             playPauseButton.setImage(UIImage(named: "Play"), for: .normal)
+        }
+        if sendUpdate {
+            do {
+                try WatchSessionManager.sharedManager.updateApplicationContext(["state": state.rawValue])
+            } catch let error {
+                print(error)
+            }
         }
     }
     
@@ -44,4 +54,13 @@ class NowPlayingViewController: UIViewController {
 
     }
 
+}
+
+extension NowPlayingViewController: ApplicationContextChangedDelegate {
+
+    func didChangePlayingState(_ state: SongState) {
+        song.state = state
+        playPauseUpdateSongState(state: song.state, sendUpdate: false)
+    }
+    
 }
