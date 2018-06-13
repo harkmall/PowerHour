@@ -17,8 +17,16 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var songLabel: WKInterfaceLabel!
     
     var songState: SongState = .paused
-    var currentVolumeLevel: Float = 1.0
-    let numberOfSteps = 3
+    var currentVolumeLevel: Float = 1.0 {
+        didSet {
+            do {
+                try WatchSessionManager.sharedManager.updateApplicationContext(["volume": currentVolumeLevel])
+            } catch let error {
+                print(error)
+            }
+        }
+    }
+    let numberOfSteps = 5
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -62,13 +70,25 @@ class InterfaceController: WKInterfaceController {
 
 extension InterfaceController: ApplicationContextChangedDelegate {
     func didReceiveSong(_ song: Song) {
-        songLabel.setText(song.name)
-        artistLabel.setText(song.artist)
+        DispatchQueue.main.async {
+            self.songLabel.setText(song.name)
+            self.artistLabel.setText(song.artist)
+        }
     }
     
     func didChangePlayingState(_ state: SongState) {
-        songState = state
-        updateSongState(state: songState, sendUpdate: false)
+        DispatchQueue.main.async {
+            self.songState = state
+            self.updateSongState(state: self.songState, sendUpdate: false)
+        }
+    }
+    
+    func volumeDidChange(_ volume: Float) {
+        DispatchQueue.main.async {
+            self.animate(withDuration: 0.2, animations: {
+                self.volumeSlider.setValue(volume)
+            })
+        }
     }
 }
 

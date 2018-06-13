@@ -15,6 +15,18 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
+    @IBOutlet weak var volumeSlider: UISlider!
+    
+    let maxVolume: Float = 5
+    var currentVolumeLevel: Float = 1 {
+        didSet {
+            do {
+                try WatchSessionManager.sharedManager.updateApplicationContext(["volume": currentVolumeLevel])
+            } catch let error {
+                print(error)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +63,7 @@ class NowPlayingViewController: UIViewController {
     }
     
     @IBAction func volumeSliderChanged(_ sender: UISlider) {
-
+        currentVolumeLevel = sender.value
     }
 
 }
@@ -59,8 +71,18 @@ class NowPlayingViewController: UIViewController {
 extension NowPlayingViewController: ApplicationContextChangedDelegate {
 
     func didChangePlayingState(_ state: SongState) {
-        song.state = state
-        playPauseUpdateSongState(state: song.state, sendUpdate: false)
+        DispatchQueue.main.async {
+            self.song.state = state
+            self.playPauseUpdateSongState(state: self.song.state, sendUpdate: false)
+        }
+    }
+    
+    func volumeDidChange(_ volume: Float) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.volumeSlider.setValue(volume, animated: true)
+            })
+        }
     }
     
 }

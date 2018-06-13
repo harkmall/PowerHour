@@ -120,7 +120,7 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="fuX-yI-m4d">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="5" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuX-yI-m4d">
                                         <rect key="frame" x="-2" y="139" width="339" height="31"/>
                                         <connections>
                                             <action selector="volumeSliderChanged:" destination="joH-L7-p5l" eventType="valueChanged" id="3KT-GX-Xhi"/>
@@ -144,6 +144,7 @@
                         <outlet property="artistNameLabel" destination="9fk-kR-2rc" id="3eY-2b-QeQ"/>
                         <outlet property="playPauseButton" destination="loF-7Q-syw" id="axN-pc-UfO"/>
                         <outlet property="songNameLabel" destination="zUf-zo-hgy" id="m80-2n-OHT"/>
+                        <outlet property="volumeSlider" destination="fuX-yI-m4d" id="Y1N-en-PJR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysr-ZE-Lhl" userLabel="First Responder" sceneMemberID="firstResponder"/>

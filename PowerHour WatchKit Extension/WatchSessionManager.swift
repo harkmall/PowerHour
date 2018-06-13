@@ -11,6 +11,7 @@ import WatchConnectivity
 protocol ApplicationContextChangedDelegate {
     func didReceiveSong(_ song: Song)
     func didChangePlayingState(_ state: SongState)
+    func volumeDidChange(_ volume: Float)
 }
 
 class WatchSessionManager: NSObject {
@@ -50,6 +51,9 @@ extension WatchSessionManager: WCSessionDelegate {
         }
         else if let stateString = applicationContext["state"] as? String, let songState = SongState(rawValue: stateString) {
             applicationContextChangedDelegate?.didChangePlayingState(songState)
+        }
+        else if let volume = applicationContext["volume"] as? Float {
+            applicationContextChangedDelegate?.volumeDidChange(volume)
         }
         
     }
