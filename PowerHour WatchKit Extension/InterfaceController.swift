@@ -17,15 +17,12 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var songLabel: WKInterfaceLabel!
     
     var songState: SongState = .paused
-    var currentVolumeLevel: Float = 1.0 {
-        didSet {
-            do {
-                try WatchSessionManager.sharedManager.updateApplicationContext(["volume": currentVolumeLevel])
-            } catch let error {
-                print(error)
-            }
-        }
-    }
+    var currentVolumeLevel: Float = 1.0
+//    {
+//        didSet {
+//
+//        }
+//    }
     let numberOfSteps = 5
     
     override func awake(withContext context: Any?) {
@@ -33,7 +30,7 @@ class InterfaceController: WKInterfaceController {
         
         crownSequencer.delegate = self
         volumeSlider.setValue(currentVolumeLevel)
-        WatchSessionManager.sharedManager.applicationContextChangedDelegate = self
+//        WatchSessionManager.sharedManager.applicationContextChangedDelegate = self
     }
     
     override func willActivate() {
@@ -58,39 +55,15 @@ class InterfaceController: WKInterfaceController {
             playPauseButton.setBackgroundImage(UIImage(named: "Pause"))
         }
         if sendUpdate {
-            do {
-                try WatchSessionManager.sharedManager.updateApplicationContext(["state": state.rawValue])
-            } catch let error {
-                print(error)
-            }
+
         }
     }
 
 }
 
-extension InterfaceController: ApplicationContextChangedDelegate {
-    func didReceiveSong(_ song: Song) {
-        DispatchQueue.main.async {
-            self.songLabel.setText(song.name)
-            self.artistLabel.setText(song.artist)
-        }
-    }
-    
-    func didChangePlayingState(_ state: SongState) {
-        DispatchQueue.main.async {
-            self.songState = state
-            self.updateSongState(state: self.songState, sendUpdate: false)
-        }
-    }
-    
-    func volumeDidChange(_ volume: Float) {
-        DispatchQueue.main.async {
-            self.animate(withDuration: 0.2, animations: {
-                self.volumeSlider.setValue(volume)
-            })
-        }
-    }
-}
+//extension InterfaceController: ApplicationContextChangedDelegate {
+//
+//}
 
 extension InterfaceController: WKCrownDelegate {
     func crownDidRotate(_ crownSequencer: WKCrownSequencer?, rotationalDelta: Double) {

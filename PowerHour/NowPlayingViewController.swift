@@ -18,27 +18,19 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var volumeSlider: UISlider!
     
     let maxVolume: Float = 5
-    var currentVolumeLevel: Float = 1 {
-        didSet {
-            do {
-                try WatchSessionManager.sharedManager.updateApplicationContext(["volume": currentVolumeLevel])
-            } catch let error {
-                print(error)
-            }
-        }
-    }
+    var currentVolumeLevel: Float = 1
+//    {
+//        didSet {
+//
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         songNameLabel.text = song.name
         artistNameLabel.text = song.artist
         
-        do {
-            try WatchSessionManager.sharedManager.updateApplicationContext(["song": song.serialized()])
-        } catch {
-            print("Looks like your song got stuck on the way! Please send again!")
-        }
-        WatchSessionManager.sharedManager.applicationContextChangedDelegate = self
+//        WatchSessionManager.sharedManager.applicationContextChangedDelegate = self
     }
     
     @IBAction func playPausePressed(_ sender: UIButton) {
@@ -54,11 +46,7 @@ class NowPlayingViewController: UIViewController {
             playPauseButton.setImage(UIImage(named: "Play"), for: .normal)
         }
         if sendUpdate {
-            do {
-                try WatchSessionManager.sharedManager.updateApplicationContext(["state": state.rawValue])
-            } catch let error {
-                print(error)
-            }
+
         }
     }
     
@@ -68,21 +56,6 @@ class NowPlayingViewController: UIViewController {
 
 }
 
-extension NowPlayingViewController: ApplicationContextChangedDelegate {
-
-    func didChangePlayingState(_ state: SongState) {
-        DispatchQueue.main.async {
-            self.song.state = state
-            self.playPauseUpdateSongState(state: self.song.state, sendUpdate: false)
-        }
-    }
-    
-    func volumeDidChange(_ volume: Float) {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.volumeSlider.setValue(volume, animated: true)
-            })
-        }
-    }
-    
-}
+//extension NowPlayingViewController: ApplicationContextChangedDelegate {
+//
+//}

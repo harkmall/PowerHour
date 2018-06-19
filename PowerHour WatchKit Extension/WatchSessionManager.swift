@@ -45,16 +45,6 @@ extension WatchSessionManager: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        if let songData = applicationContext["song"] as? [String: String] {
-            let song = Song(dict: songData)
-            applicationContextChangedDelegate?.didReceiveSong(song)
-        }
-        else if let stateString = applicationContext["state"] as? String, let songState = SongState(rawValue: stateString) {
-            applicationContextChangedDelegate?.didChangePlayingState(songState)
-        }
-        else if let volume = applicationContext["volume"] as? Float {
-            applicationContextChangedDelegate?.volumeDidChange(volume)
-        }
-        
+
     }
 }
