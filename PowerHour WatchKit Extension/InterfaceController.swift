@@ -18,11 +18,7 @@ class InterfaceController: WKInterfaceController {
     
     var songState: SongState = .paused
     var currentVolumeLevel: Float = 1.0
-//    {
-//        didSet {
-//
-//        }
-//    }
+    //watchSendVolume
     let numberOfSteps = 5
     
     override func awake(withContext context: Any?) {
@@ -55,15 +51,14 @@ class InterfaceController: WKInterfaceController {
             playPauseButton.setBackgroundImage(UIImage(named: "Pause"))
         }
         if sendUpdate {
-
+            //watchSendState
         }
     }
 
 }
 
-//extension InterfaceController: ApplicationContextChangedDelegate {
-//
-//}
+//watchReceiveSong
+
 
 extension InterfaceController: WKCrownDelegate {
     func crownDidRotate(_ crownSequencer: WKCrownSequencer?, rotationalDelta: Double) {

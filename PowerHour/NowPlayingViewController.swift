@@ -19,17 +19,13 @@ class NowPlayingViewController: UIViewController {
     
     let maxVolume: Float = 5
     var currentVolumeLevel: Float = 1
-//    {
-//        didSet {
-//
-//        }
-//    }
+    //appSendVolume
     
     override func viewDidLoad() {
         super.viewDidLoad()
         songNameLabel.text = song.name
         artistNameLabel.text = song.artist
-        
+        //appSendSong
 //        WatchSessionManager.sharedManager.applicationContextChangedDelegate = self
     }
     
@@ -56,6 +52,4 @@ class NowPlayingViewController: UIViewController {
 
 }
 
-//extension NowPlayingViewController: ApplicationContextChangedDelegate {
-//
-//}
+//appReceiveState
